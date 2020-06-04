@@ -64,12 +64,12 @@ public class OtpActivity extends AppCompatActivity {
 
     void sendVerificationCode() {
 
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(number, 60, TimeUnit.SECONDS, this,
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(number, 30, TimeUnit.SECONDS, this,
 
                 new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
                     @Override
-                    public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                    public void onCodeSent(@NonNull String id, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                         OtpActivity.this.id = id;
 
                     }
@@ -97,6 +97,7 @@ public class OtpActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Intent a = new Intent(OtpActivity.this, chatActivity.class);
                             startActivity(a);
+                            finish();
                         } else {
                             Toast.makeText(OtpActivity.this, "wrong otp", Toast.LENGTH_SHORT).show();
                         }
